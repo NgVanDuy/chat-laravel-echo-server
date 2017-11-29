@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -39,7 +38,17 @@ window.axios.defaults.headers.common = {
 
 import Echo from "laravel-echo"
 
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'a0e0f7cd77e818758559'
+// });
+
 window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'a0e0f7cd77e818758559'
+    broadcaster: 'socket.io',
+    host: 'http://chatlaravel.nvd:6001',
+    auth: {
+        headers: {
+            'Authorization': 'Bearer ' + "68e39fbd9f4db248d48f69c867aa2706"
+        }
+    }
 });
