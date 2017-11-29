@@ -1,0 +1,32 @@
+{
+	"authHost": "http://chatlaravel.nvd:6001",
+	"authEndpoint": "/broadcasting/auth",
+	"clients": [
+		{
+			"appId": "base64:DuLeiViRQaYBiT8NiuaeXkc33BnCusUIEe1D2crolSY=",
+			"key": "68e39fbd9f4db248d48f69c867aa2706"
+		}
+	],
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": null,
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"sslCertPath": "",
+	"sslKeyPath": "",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
+	"apiOriginAllow": {
+		"allowCors": false,
+		"allowOrigin": "",
+		"allowMethods": "",
+		"allowHeaders": ""
+	}
+}
