@@ -36,7 +36,7 @@ window.axios.defaults.headers.common = {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from "laravel-echo"
+import Echo from "laravel-echo";
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
@@ -48,7 +48,7 @@ window.Echo = new Echo({
     host: 'http://chatlaravel.nvd:6001',
     auth: {
         headers: {
-            'Authorization': 'Bearer ' + "68e39fbd9f4db248d48f69c867aa2706"
+            'Authorization': 'Bearer ' + "DuLeiViRQaYBiT8Niu"
         }
     }
 });

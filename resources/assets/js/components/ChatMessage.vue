@@ -1,7 +1,8 @@
 <template lang="html">
   <div class="chat-message">
     <p>{{ message.message }}</p>
-    <small>{{ message.user.name }}</small>
+    <small>{{ message.user.name}}</small>
+    <button>Delete</button>
   </div>
 </template>
 

@@ -14,10 +14,12 @@ export default {
     },
     methods: {
         sendMessage() {
+            alert('send message');
             this.$emit('messagesent', {
                 message: this.messageText,
                 user: {
-                    name: $('.navbar-right .dropdown-toggle').text()
+                    name: $('#user_name').text(),
+                    id: $('#user_id').text()
                 }
             });
             this.messageText = '';
@@ -29,6 +31,8 @@ export default {
 <style lang="css">
 .chat-composer {
     display: flex;
+    width: auto;
+    bottom: 30px;
 }
 
 .chat-composer input {

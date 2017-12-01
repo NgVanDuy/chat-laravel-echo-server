@@ -1,6 +1,10 @@
 <?php
 
 use App\Events\MessagePosted;
+use Illuminate\Support\Facades\Auth;
+use App\Room;
+use App\Message;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,31 +17,50 @@ use App\Events\MessagePosted;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    $rooms = Room::all();
+    return view('welcome', ['rooms' => $rooms]);
 });
 
-Route::get('/chat', function () {
-    return view('chat');
+Route::get('/chatroom/{room_name}', function($room_name){
+    $rooms = Room::all();
+    $current_room = Room::where('name', '=', $room_name)->first();
+    if (!$current_room) {
+        if (Auth::user()->id === 1) {
+            $new_room = Room::create(['name' => $room_name]);
+            return view('chat', ['rooms' => $rooms, 'new_room'=> $new_room]);
+        } else {
+           return redirect('/');
+        }
+    }
+    return view('chat', ['rooms' => $rooms, 'current_room' => $current_room]);
 })->middleware('auth');
 
-Route::get('/messages', function () {
-    return App\Message::with('user')->get();
+//Route::get('/chat', function(){
+//    return view('chat');
+//})->middleware('auth');
+
+Route::get('/messages/{room_id}', function($room_id){
+    return Message::with('user')->where('room_id', '=', $room_id)->get();
 })->middleware('auth');
 
-Route::post('/messages', function () {
+Route::post('/messages/{room_id}', function($room_id){
     // Store the new message
-    $user = Auth::user();
-
-    $message = $user->messages()->create([
-        'message' => request()->get('message')
-    ]);
-
+    $mess = new Message();
+    $mess->message = request()->get('mess');
+    $user_id = intval(request()->get('userId'));
+    $mess->user_id = $user_id;
+    $user = User::find($user_id);
+    $mess->room_id = $room_id;
+    $mess->save();
     // Announce that a new message has been posted
-    broadcast(new MessagePosted($message, $user))->toOthers();
-
+    broadcast(new MessagePosted($mess, $user))->toOthers();
     return ['status' => 'OK'];
 })->middleware('auth');
+
+Route::post('/deletemessage/{user_id}', function ($user_id) {
+
+});
 
 Auth::routes();
 
