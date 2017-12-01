@@ -28,7 +28,6 @@ const app = new Vue({
             var room_id = $('#room_id').text();
             // Add to existing messages
             this.messages.push(message);
-            alert(message.user.name);
             // Persist to the database etc
             axios.post('/messages/' + room_id, {
                 mess: message.message,
@@ -38,13 +37,26 @@ const app = new Vue({
             .then(response => {
                 // Do whatever;
             });
+        },
+        delMessage(message) {
+            var deleteUserId = parseInt($('#user_id').text());
+            axios.post('/delmessage/' + message.id, {
+                deleteUserId: deleteUserId
+            }).then(response => {
+                // console.log(response);
+                if (!response.data.status) {
+                    alert('ai cho xóa');
+                } else {
+                    console.log(response.data);
+                }
+            });
         }
     },
     created() {
         var room_id = parseInt($('#room_id').text());
         axios.get('/messages/' + room_id).then(response => {
-            console.log(this.messages);
             this.messages = response.data;
+            // console.log(this.messages);
         });
         Echo.join("chatroom_" + room_id)
         .here((users) => {
@@ -54,13 +66,27 @@ const app = new Vue({
             this.usersInRoom.push(user);
         })
         .leaving((user) => {
-            this.usersInRoom = this.usersInRoom.filter(u => u != user)
+            // this.usersInRoom = this.usersInRoom.filter(u => u != user)
+            this.usersInRoom.$remove(user);
         })
         .listen('MessagePosted', (e) => {
             this.messages.push({
                 message: e.message.message,
                 user: e.user
             });
-        });
+        })
+        .listen('MessageDeleted', (mess) => {
+            // for (let i = 0; i < this.messages.length; i++) {
+            //     if (this.messages[i].id == mess.id) {
+            //         this.messages.remove(i);
+            //         break;
+            //     }
+            // }
+            var room_id = $('#room_id').text();
+            axios.get('/messages/' + room_id).then(response => {
+                this.messages = response.data;
+                // console.log(this.messages);
+            });
+        })
     }
 });

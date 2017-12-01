@@ -16,7 +16,7 @@
                         <span class="badge pull-right">@{{ usersInRoom.length }}</span>
                     </div>
 
-                    <chat-log :messages="messages"></chat-log>
+                    <chat-log :messages="messages" v-on:messagedeleted="delMessage"></chat-log>
                     <chat-composer v-on:messagesent="addMessage"></chat-composer>
                 </div>
             </div>

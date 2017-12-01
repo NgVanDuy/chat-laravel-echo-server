@@ -2,6 +2,7 @@
 
 use App\Events\MessagePosted;
 use Illuminate\Support\Facades\Auth;
+use App\Events\MessageDeleted;
 use App\Room;
 use App\Message;
 use App\User;
@@ -42,6 +43,7 @@ Route::get('/chatroom/{room_name}', function($room_name){
 
 Route::get('/messages/{room_id}', function($room_id){
     return Message::with('user')->where('room_id', '=', $room_id)->get();
+//    return Message::where('room_id', '=', $room_id)->get();
 })->middleware('auth');
 
 Route::post('/messages/{room_id}', function($room_id){
@@ -58,9 +60,18 @@ Route::post('/messages/{room_id}', function($room_id){
     return ['status' => 'OK'];
 })->middleware('auth');
 
-Route::post('/deletemessage/{user_id}', function ($user_id) {
-
-});
+Route::post('/delmessage/{message_id}', function ($message_id) {
+    $deleteUserId = intval(request()->get('deleteUserId'));
+    $mess = Message::find(intval($message_id));
+//    $mess = $tempMess;
+    $userId = $mess->user_id;
+    if(($deleteUserId == 1) || ($deleteUserId == $userId)) {
+        broadcast(new MessageDeleted($mess));
+        $mess->delete();
+        return ['status' => true, 'messId' => intval($message_id)];
+    }
+    return ['status' => false];
+    })->middleware('auth');
 
 Auth::routes();
 

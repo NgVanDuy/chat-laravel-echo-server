@@ -14,12 +14,11 @@ export default {
     },
     methods: {
         sendMessage() {
-            alert('send message');
             this.$emit('messagesent', {
                 message: this.messageText,
                 user: {
                     name: $('#user_name').text(),
-                    id: $('#user_id').text()
+                    id: parseInt($('#user_id').text())
                 }
             });
             this.messageText = '';

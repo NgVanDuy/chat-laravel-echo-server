@@ -18,11 +18,6 @@ class MessageDeleted implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var User
-     */
-    public $user;
-
-    /**
      * @var Message
      */
     public $message;
@@ -32,9 +27,8 @@ class MessageDeleted implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, Message $message)
+    public function __construct(Message $message)
     {
-        $this->user = $user;
         $this->message = $message;
     }
 
@@ -45,6 +39,6 @@ class MessageDeleted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('chatroom_' . $this->message->room_id);
+        return new PresenceChannel('chatroom_'.$this->message->room_id);
     }
 }

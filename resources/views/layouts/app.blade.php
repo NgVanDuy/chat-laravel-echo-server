@@ -59,7 +59,7 @@
                                 <span style="display: none;" id="user_id">{{Auth::user()->id}}</span>
                                 <a href="#" id="user_name" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }}
-                                    {{--<span class="caret"></span>--}}
+                                    <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
