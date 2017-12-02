@@ -68,6 +68,11 @@ const app = new Vue({
         .leaving((user) => {
             // this.usersInRoom = this.usersInRoom.filter(u => u != user)
             this.usersInRoom.$remove(user);
+            var room_id = $('#room_id').text();
+            axios.get('/messages/' + room_id).then(response => {
+                this.messages = response.data;
+                // console.log(this.messages);
+            });
         })
         .listen('MessagePosted', (e) => {
             this.messages.push({

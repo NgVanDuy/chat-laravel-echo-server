@@ -23,7 +23,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">

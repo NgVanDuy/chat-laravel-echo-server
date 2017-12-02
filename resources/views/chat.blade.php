@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading" id="room_name">
+                    <div class="panel-heading" id="room_name" style="width: 100%;">
                         @foreach($rooms as $room)
                             <a href="/chatroom/{{$room->name}}">{{$room->name}}</a>
                         @endforeach

@@ -14,6 +14,12 @@ export default {
 </script>
 
 <style lang="css">
+.chat-log {
+    overflow-y: scroll;
+    height: 500px;
+    position: relative;
+}
+
 .chat-log .chat-message:nth-child(even) {
     background-color: #ccc;
 }
