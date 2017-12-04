@@ -25,17 +25,15 @@ const app = new Vue({
     },
     methods: {
         addMessage(message) {
-            var room_id = $('#room_id').text();
-            // Add to existing messages
+            var room_id = parseInt($('#room_id').text());
             this.messages.push(message);
-            // Persist to the database etc
             axios.post('/messages/' + room_id, {
                 mess: message.message,
                 userId: message.user.id,
                 username: message.user.name
             })
             .then(response => {
-                // Do whatever;
+                
             });
         },
         delMessage(message) {
@@ -43,7 +41,6 @@ const app = new Vue({
             axios.post('/delmessage/' + message.id, {
                 deleteUserId: deleteUserId
             }).then(response => {
-                // console.log(response);
                 if (!response.data.status) {
                     alert('ai cho xóa');
                 } else {
@@ -56,7 +53,6 @@ const app = new Vue({
         var room_id = parseInt($('#room_id').text());
         axios.get('/messages/' + room_id).then(response => {
             this.messages = response.data;
-            // console.log(this.messages);
         });
         Echo.join("chatroom_" + room_id)
         .here((users) => {
@@ -71,7 +67,6 @@ const app = new Vue({
             var room_id = $('#room_id').text();
             axios.get('/messages/' + room_id).then(response => {
                 this.messages = response.data;
-                // console.log(this.messages);
             });
         })
         .listen('MessagePosted', (e) => {

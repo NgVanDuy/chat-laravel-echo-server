@@ -13,7 +13,7 @@
     <!-- Styles -->
     <link href= "/css/app.css" rel="stylesheet">
 
-    <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+    <script src="//{{ Request::getHost() }}:8081/socket.io/socket.io.js"></script>
 
     <!-- Scripts -->
     <script>

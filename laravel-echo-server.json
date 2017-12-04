@@ -1,13 +1,13 @@
 {
-	"authHost": "http://chatlaravel.nvd:8282",
+	"authHost": "https://chat-nguyenvanduy.c9users.io",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
 			"appId": "DuLeiViRQaYBiT8Niu",
 			"key": "68e39fbd9f4db248d48f69c867aa2706"
-		}
+		}	
 	],
-	"database": "sqlite",
+	"database": "redis",
 	"databaseConfig": {
 		"redis": {
 			"port": "6379",
@@ -19,7 +19,7 @@
 	},
 	"devMode": true,
 	"host": "",
-	"port": "6001",
+	"port": "8081",
 	"protocol": "http",
 	"socketio": {},
 	"sslCertPath": "",
@@ -28,7 +28,7 @@
 	"sslPassphrase": "",
 	"apiOriginAllow": {
 		"allowCors": true,
-		"allowOrigin": "http://chatlaravel.nvd:8282",
+		"allowOrigin": "https://chat-nguyenvanduy.c9users.io",
 		"allowMethods": "GET, POST",
 		"allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
 	}

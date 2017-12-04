@@ -37,13 +37,9 @@ Route::get('/chatroom/{room_name}', function($room_name){
     return view('chat', ['rooms' => $rooms, 'current_room' => $current_room]);
 })->middleware('auth');
 
-//Route::get('/chat', function(){
-//    return view('chat');
-//})->middleware('auth');
 
 Route::get('/messages/{room_id}', function($room_id){
     return Message::with('user')->where('room_id', '=', $room_id)->get();
-//    return Message::where('room_id', '=', $room_id)->get();
 })->middleware('auth');
 
 Route::post('/messages/{room_id}', function($room_id){
@@ -63,8 +59,8 @@ Route::post('/messages/{room_id}', function($room_id){
 Route::post('/delmessage/{message_id}', function ($message_id) {
     $deleteUserId = intval(request()->get('deleteUserId'));
     $mess = Message::find(intval($message_id));
-//    $mess = $tempMess;
     $userId = $mess->user_id;
+   
     if(($deleteUserId == 1) || ($deleteUserId == $userId)) {
         broadcast(new MessageDeleted($mess));
         $mess->delete();

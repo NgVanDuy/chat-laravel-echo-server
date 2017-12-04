@@ -45,7 +45,7 @@ import Echo from "laravel-echo";
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http://chatlaravel.nvd:6001',
+    host: 'https://chat-nguyenvanduy.c9users.io:8081',
     auth: {
         headers: {
             'Authorization': 'Bearer ' + "DuLeiViRQaYBiT8Niu"
