@@ -33,7 +33,8 @@ const app = new Vue({
                 username: message.user.name
             })
             .then(response => {
-                
+                var t = $('#chat-log');
+                t.animate({ scrollTop: t.prop('scrollHeight') + (t.scrollTop() + t.height()) }, "slow");
             });
         },
         delMessage(message) {
